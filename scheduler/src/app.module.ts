@@ -18,7 +18,9 @@ import { LegacyRouteController } from './controllers/legacy-route.controller';
 import { getEnv } from './util';
 import { MarketController } from './controllers/market.controller';
 import { UCController } from './controllers/uc.controller';
+import { SocketController } from './controllers/socket.controller';
 import { Response } from 'express';
+import { EventsModule } from './events/events.module';
 
 const { publicDir } = getEnv();
 @Module({
@@ -37,8 +39,9 @@ const { publicDir } = getEnv();
         },
       },
     }),
+    EventsModule,
   ],
-  controllers: [HealthController, LegacyRouteController, MarketController, UCController],
+  controllers: [HealthController, SocketController, LegacyRouteController, MarketController, UCController],
   providers: [],
 })
 export class AppModule {}

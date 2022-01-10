@@ -38,6 +38,7 @@ import userStore from './user/stores';
 import permStore from 'user/stores/permission';
 import { getJoinedOrgs } from 'app/org-home/services/org';
 import orgStore, { isAdminRoute } from 'app/org-home/stores/org';
+import { io } from 'socket.io-client';
 import modules from './mf-modules'; // ambiguous modules may conflict with modules folder, then rename to mf-modules
 import './styles/antd-extension.scss';
 import './styles/app.scss';
@@ -48,6 +49,16 @@ setConfig('onAPISuccess', message.success);
 setConfig('onAPIFail', notify);
 
 const history = getConfig('history');
+
+const socket = io();
+// socket.emit('events', { name: 'Nest' });
+// socket.on('reply', (data) => {
+//   console.log('get reply:', data);
+// });
+socket.on('broadcast', (data) => {
+  // console.log('get broadcast:', data);
+  // Object.values(data).forEach((p) => p.then((m) => m.default(registerModule)));
+});
 
 const momentLangMap = {
   en: 'en',
